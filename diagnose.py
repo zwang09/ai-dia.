@@ -5,12 +5,11 @@ import openai
 import webbrowser
 
 # Set your OpenAI API key
-openai.api_key = "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"
+openai.api_key = "OPENAI API KEY GOES HERE"
 
 # Google API Key (replace with your actual Google API Key)
-GOOGLE_API_KEY = "AIzaSyCXSrN8wE0kWwqg0fGKjLUMEoQ8zoXKWQ8"
+GOOGLE_API_KEY = "GOOGLE PLACE API KEY GOES HERE"
 
-# Function to send a message to ChatGPT (GPT-4) and get the response
 def send_to_chatgpt(user_message):
     try:
         response = openai.ChatCompletion.create(
@@ -27,7 +26,7 @@ def send_to_chatgpt(user_message):
     except Exception as e:
         return f"Error: {e}"
 
-# Function to handle the chat conversation
+
 def chat_with_gpt():
     user_message = chat_entry.get("1.0", tk.END).strip()
     if user_message == "":
@@ -41,7 +40,7 @@ def chat_with_gpt():
     chat_display.config(state=tk.DISABLED)
     chat_entry.delete("1.0", tk.END)
 
-# Function to display the ChatGPT window
+
 def show_chatgpt_window():
     chat_window = tk.Toplevel(window)
     chat_window.title("Chat with ChatGPT (GPT-4)")
@@ -69,7 +68,7 @@ def show_chatgpt_window():
     )
     btn_send.pack(pady=10)
 
-# Scrollable frame for the therapist finder
+
 class ScrollableFrame(tk.Frame):
     def __init__(self, container, *args, **kwargs):
         super().__init__(container, *args, **kwargs)
@@ -92,7 +91,7 @@ class ScrollableFrame(tk.Frame):
         canvas.pack(side="left", fill="both", expand=True)
         scrollbar.pack(side="right", fill="y")
 
-# Find the nearest therapists using Google Maps based on user input
+
 def find_nearest_therapist():
     location = simpledialog.askstring(
         "Location", "Enter your city or zip code:"
@@ -113,7 +112,7 @@ def find_nearest_therapist():
         messagebox.showinfo("No Results", "No therapists found in your area.")
         return
 
-    # Create a list of nearby therapists with their names and addresses
+  
     therapist_window = tk.Toplevel(window)
     therapist_window.title("Nearby Therapists")
 
@@ -142,12 +141,12 @@ def find_nearest_therapist():
         )
         btn_open_map.pack(pady=5)
 
-# Function to open the therapist's location in Google Maps
+
 def open_in_google_maps(therapist_name):
     query = f"https://www.google.com/maps/search/?api=1&query={therapist_name.replace(' ', '+')}"
     webbrowser.open(query)
 
-# Minigame for focus and stress relief
+
 def start_minigame():
     game_window = tk.Toplevel(window)
     game_window.title("Ball Catch Game")
@@ -188,12 +187,12 @@ def start_minigame():
     game_window.bind("<Right>", move_paddle)
     move_ball()
 
-# Show the home screen after registration
+
 def show_home_screen(username):
     for widget in window.winfo_children():
         widget.pack_forget()
         
-    # Add the title to the home screen
+  
     title_label = tk.Label(
         window, text="AI DIA.", font=("Arial", 20, "bold"),
         bg="#BBDEFB", fg="#0D47A1"
@@ -230,7 +229,7 @@ def show_home_screen(username):
     )
     btn_minigame.grid(row=1, column=0, padx=10, pady=10)
 
-    # Mental Health Diagnosis Tests Dropdown
+   
     label_dropdown = tk.Label(
         button_frame, text="Mental Health Diagnosis Tests:",
         font=("Arial", 12), bg="#BBDEFB", fg="#0D47A1"
@@ -260,7 +259,7 @@ def show_home_screen(username):
     )
     btn_logout.grid(row=4, column=0, columnspan=2, padx=10, pady=10)
 
-# Function to start the selected test
+
 def start_selected_test(test_name):
     if test_name == "ADHD Test":
         adhd_test()
@@ -275,7 +274,7 @@ def start_selected_test(test_name):
             "Selection Error", "Please select a test from the dropdown."
         )
 
-# Show registration screen
+
 def show_registration_screen():
     for widget in window.winfo_children():
         widget.pack_forget()
@@ -288,7 +287,7 @@ def show_registration_screen():
     entry_password.pack()
     btn_register.pack(pady=20)
 
-# Register user function
+
 def register_user():
     name, email, password = entry_name.get(), entry_email.get(), entry_password.get()
     if not (name and email and password):
@@ -300,7 +299,7 @@ def register_user():
         entry_password.delete(0, tk.END)
         show_home_screen(name)
 
-# Helper function to run a test
+
 def run_test(test_name, questions, options, point_values):
     for widget in window.winfo_children():
         widget.pack_forget()
@@ -348,7 +347,7 @@ def run_test(test_name, questions, options, point_values):
     )
     btn_submit.pack(pady=20)
 
-# Interpretation function
+
 def interpret_score(test_name, score):
     if test_name == "Depression Test":
         if score <= 10:
@@ -387,7 +386,7 @@ def interpret_score(test_name, score):
         else:
             return "Severe symptoms of anxiety."
 
-# Depression Test
+
 def depression_test():
     questions = [
         "Little interest or pleasure in doing things?",
@@ -415,7 +414,7 @@ def depression_test():
     point_values = [0, 1, 2, 3]
     run_test("Depression Test", questions, options, point_values)
 
-# ADHD Test
+
 def adhd_test():
     questions = [
         "Difficulty paying attention to details?",
@@ -443,7 +442,7 @@ def adhd_test():
     point_values = [0, 1, 2, 3, 4]
     run_test("ADHD Test", questions, options, point_values)
 
-# PTSD Test
+
 def ptsd_test():
     questions = [
         "Recurrent unwanted memories of trauma?",
@@ -471,7 +470,7 @@ def ptsd_test():
     point_values = [0, 1, 2, 3, 4]
     run_test("PTSD Test", questions, options, point_values)
 
-# Anxiety Test
+
 def anxiety_test():
     questions = [
         "Feeling nervous, anxious, or on edge?",
@@ -499,13 +498,13 @@ def anxiety_test():
     point_values = [0, 1, 2, 3]
     run_test("Anxiety Test", questions, options, point_values)
 
-# Initialize the main window
+
 window = tk.Tk()
 window.title("AI DIA.")
 window.geometry("400x600")
 window.configure(bg="#E3F2FD")
 
-# Create registration widgets
+
 label_name = tk.Label(
     window, text="Name:", font=("Arial", 12),
     bg="#E3F2FD", fg="#0D47A1"
@@ -524,14 +523,14 @@ label_password = tk.Label(
 )
 entry_password = tk.Entry(window, width=30, show="*")
 
-# Register button
+
 btn_register = tk.Button(
     window, text="Register", command=register_user,
     font=("Arial", 12), bg="#64B5F6", fg="white"
 )
 
-# Run the registration screen
+
 show_registration_screen()
 
-# Start Tkinter main loop
+
 window.mainloop()
